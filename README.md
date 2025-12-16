@@ -2,8 +2,60 @@
 
 ## 第一步打开Linux命令行，键入下面命令：
 wget http://fishros.com/install -O fishros && . fishros
-Linux 与 ROS2 常用命令参考
+# Linux 与 ROS2 常用命令参考手册
+https://img.shields.io/badge/License-MIT-yellow.svg
+https://img.shields.io/badge/ROS2-Humble%2520%257C%2520Foxy%2520%257C%2520Galactic-blue
+
+📋 目录
 Linux 常用命令
+
+文件与目录操作
+
+权限管理
+
+进程管理
+
+网络相关
+
+系统信息
+
+包管理
+
+ROS2 常用命令
+
+环境设置
+
+工作空间操作
+
+包管理
+
+节点管理
+
+话题管理
+
+服务管理
+
+参数管理
+
+动作管理
+
+启动文件
+
+录制与回放
+
+接口与消息
+
+调试工具
+
+日志管理
+
+常用组合命令
+
+实用技巧
+
+快速开始
+
+🐧 Linux 常用命令
 文件与目录操作
 bash
 # 列出文件
@@ -71,7 +123,7 @@ sudo apt upgrade          # 升级所有软件包
 sudo apt install package  # 安装软件包
 sudo apt remove package   # 移除软件包
 sudo apt search keyword   # 搜索软件包
-ROS2 常用命令
+🤖 ROS2 常用命令
 环境设置
 bash
 # 设置ROS2环境（每次打开新终端都需要）
@@ -246,7 +298,7 @@ ros2 topic echo /topic1 & ros2 topic echo /topic2 &
 
 # 查找节点所在包
 ros2 pkg prefix --share $(ros2 pkg list | grep node_name)
-实用技巧
+💡 实用技巧
 命令补全
 bash
 # 启用ROS2自动补全
@@ -278,5 +330,51 @@ create_ros2_ws() {
     cd ~/$1
     echo "ROS2工作空间 $1 已创建"
 }
-注意：以上命令基于ROS2 Humble版本，其他版本可能略有差异。请根据实际安装的ROS2版本调整路径和命令。
+🚀 快速开始
+安装ROS2（以Humble为例）
+bash
+# 设置locale
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
+# 添加ROS2仓库
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+# 安装ROS2
+sudo apt update
+sudo apt install ros-humble-desktop
+创建第一个ROS2节点
+bash
+# 创建工作空间
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws
+
+# 创建包
+ros2 pkg create my_first_package --build-type ament_python --dependencies rclpy
+
+# 编写节点代码后构建
+colcon build --packages-select my_first_package
+source install/setup.bash
+
+# 运行节点
+ros2 run my_first_package my_first_node
+📝 注意事项
+版本兼容性：以上命令基于ROS2 Humble版本，其他版本可能略有差异
+
+环境变量：每次打开新终端都需要重新source ROS2环境
+
+工作空间：每个工作空间都需要单独source其install/setup.bash
+
+权限问题：部分操作可能需要sudo权限，请谨慎使用
+
+🤝 贡献指南
+欢迎提交Issue和Pull Request来完善本命令手册！
+
+📄 许可证
+本项目采用 MIT 许可证 - 查看 LICENSE 文件了解详情
