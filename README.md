@@ -2,9 +2,9 @@
 
 ## 第一步打开Linux命令行，键入下面命令：
 wget http://fishros.com/install -O fishros && . fishros
-Linux 与 ROS2 常用命令手册
-Linux 常用命令
-文件与目录操作   
+## Linux 与 ROS2 常用命令
+# Linux 常用命令
+#文件与目录操作   
 bash
 # 列出目录内容
 ls -la           # 显示详细信息
